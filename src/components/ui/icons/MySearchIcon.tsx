@@ -2,7 +2,7 @@ import { SearchIcon } from "@chakra-ui/icons"
 import { IconButton } from "@chakra-ui/react"
 import axios from "axios"
 import { useFormContext } from "react-hook-form"
-import { Product } from "schemas/SaleSchema"
+// import { Product } from "schemas/SaleSchema"
 import { env } from "~/env.mjs"
 
 interface Props {
@@ -24,7 +24,7 @@ const MySearchIcon = ({ index }: Props) => {
           `${env.NEXT_PUBLIC_BACKEND_BASE_URL}/products/${code}`,
           { withCredentials: true }
         )
-        const product: Product = data.data
+        const product: any = data.data
         const { supplier_cost, micro, iva, profit_margin, salvament_margin } =
           product
 
