@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {
+interface Props {
+  user: {} |null
+}
+const initialState:Props = {
   user: null,
 };
 
