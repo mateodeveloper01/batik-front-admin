@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { env } from "~/env.mjs";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
+import { CategoriesFromDB } from "schemas/categorySchema";
 
 interface Prop {
   item: CategoriesFromDB;
@@ -12,15 +12,18 @@ interface Prop {
 const ItemCategory = ({ item }: Prop) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const remove = (id: any) => {
+  const remove = (id: string) => {
     axios
       .delete(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/categories/${id}`, {
         withCredentials: true,
       })
-      .then((data) => queryClient.invalidateQueries());
+      .then(() => queryClient.invalidateQueries())
+      .catch((error) => {
+        console.error(error);
+      });
   };
   const edit = (id: string) => {
-    router.push(`/category/${id}`);
+    router.push(`/category/${id}`).catch(console.error);
   };
   return (
     <Card

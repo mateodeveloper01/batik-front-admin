@@ -8,22 +8,22 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { editItem, getItem } from "~/api/api";
+import { editItem, getItem } from "api/api";
 
-import MyCheckbox from "~/components/ui/checkbox/MyCheckbox";
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
-import MySelect from "~/components/ui/selects/MySelect";
-import MySelectImg from "~/components/ui/selects/MySelectImg";
-import MySelectObject from "~/components/ui/selects/MySelectObject";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
+import MyCheckbox from "components/ui/checkbox/MyCheckbox";
+import MyForm from "components/ui/forms/MyForm";
+import MyInput from "components/ui/inputs/MyInput";
+import MySelect from "components/ui/selects/MySelect";
+import MySelectImg from "components/ui/selects/MySelectImg";
+import MySelectObject from "components/ui/selects/MySelectObject";
+import { CategoriesFromDB } from "schemas/categorySchema";
 import {
   PROD_TYPES,
   ProductFromDB,
   Products,
   productSchema,
-} from "~/schemas/productSchema";
-import { SubCategoriesFromDB } from "~/schemas/subCategorySchema";
+} from "schemas/productSchema";
+import { SubCategoriesFromDB } from "schemas/subCategorySchema";
 
 const ProductEdit = () => {
   const { query } = useRouter();

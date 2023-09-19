@@ -18,24 +18,18 @@ import {
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
-import { imagesFromDB } from "~/schemas/imgSchema";
-import UploadImg from "~/components/img/UploadImg";
-import { getItem } from "~/api/api";
-
-
+import { imagesFromDB } from "schemas/imgSchema";
+import { getItem } from "api/api";
+import UploadImg from "components/img/UploadImg";
 
 interface Props<T> {
   fieldName: keyof T;
   flex?: number;
-  defaultImageId? :string
+  defaultImageId?: string;
 }
 
-function MySelectImg<T>({ fieldName, flex = 3 ,defaultImageId }: Props<T>) {
-  const {
-    formState: { errors },
-    register,
-    setValue,
-  } = useFormContext();
+function MySelectImg<T>({ fieldName, flex = 3, defaultImageId }: Props<T>) {
+  const { register, setValue } = useFormContext();
 
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
@@ -43,12 +37,12 @@ function MySelectImg<T>({ fieldName, flex = 3 ,defaultImageId }: Props<T>) {
   const handleImageSelect = (id: string, url: string) => {
     setSelectedImageId(id);
     setSelectedImageUrl(url);
-    setValue(fieldName as string, id); 
-    onClose(); 
-  }
+    setValue(fieldName as string, id);
+    onClose();
+  };
   const { data, isLoading: isLoadingImages } = useQuery<imagesFromDB[]>({
     queryKey: ["img"],
-    queryFn: ()=>getItem('/img'),
+    queryFn: () => getItem("/img"),
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
@@ -69,15 +63,27 @@ function MySelectImg<T>({ fieldName, flex = 3 ,defaultImageId }: Props<T>) {
 
   return (
     <FormControl flex={flex} paddingBottom={2}>
-      <Menu >
-        <MenuButton as={Button} rightIcon={<span>&#x25BE;</span>} borderWidth="1px" onClick={onOpen}>
+      <Menu>
+        <MenuButton
+          as={Button}
+          rightIcon={<span>&#x25BE;</span>}
+          borderWidth="1px"
+          onClick={onOpen}
+        >
           Seleccionar
         </MenuButton>
         <Box display="flex" alignItems="center" mt={2}>
           {selectedImageId && selectedImageUrl && (
             <>
-              <Image src={selectedImageUrl} alt="Selected" boxSize="30px" mr={2} />
-              <Button onClick={() => setSelectedImageId(null)}>Cancelar selección</Button>
+              <Image
+                src={selectedImageUrl}
+                alt="Selected"
+                boxSize="30px"
+                mr={2}
+              />
+              <Button onClick={() => setSelectedImageId(null)}>
+                Cancelar selección
+              </Button>
             </>
           )}
         </Box>
@@ -96,14 +102,15 @@ function MySelectImg<T>({ fieldName, flex = 3 ,defaultImageId }: Props<T>) {
                       boxSize="150px"
                       cursor="pointer"
                       borderRadius="md"
-                      boxShadow={selectedImageId === o._id ? "0 0 0 2px #3182CE" : "none"}
+                      boxShadow={
+                        selectedImageId === o._id ? "0 0 0 2px #3182CE" : "none"
+                      }
                       onClick={() => handleImageSelect(o._id, o.url)}
                     />
                   </GridItem>
                 ))}
-               
               </Grid>
-              <UploadImg/>
+              <UploadImg />
             </ModalBody>
           </ModalContent>
         </Modal>

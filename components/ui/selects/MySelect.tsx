@@ -1,18 +1,15 @@
-import { FormControl, FormLabel, Select } from "@chakra-ui/react"
-import { useFormContext } from "react-hook-form"
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
 
 interface Props<T> {
-  fieldName: keyof T
-  label: string
-  flex?: number
-  options: readonly string[] 
+  fieldName: keyof T;
+  label: string;
+  flex?: number;
+  options: readonly string[];
 }
 
 function MySelect<T>({ label, fieldName, flex = 3, options }: Props<T>) {
-  const {
-    formState: { errors },
-    register,
-  } = useFormContext()
+  const { register } = useFormContext();
   return (
     <FormControl flex={flex} paddingBottom={2}>
       <FormLabel>{label}</FormLabel>
@@ -24,7 +21,7 @@ function MySelect<T>({ label, fieldName, flex = 3, options }: Props<T>) {
         ))}
       </Select>
     </FormControl>
-  )
+  );
 }
 
-export default MySelect
+export default MySelect;

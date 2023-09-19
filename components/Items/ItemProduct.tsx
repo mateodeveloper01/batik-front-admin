@@ -1,10 +1,8 @@
 import { Button, Card } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useRouter } from "next/router";
-import { deleteItem } from "~/api/api";
-import { env } from "~/env.mjs";
-import { ProductFromDB } from "~/schemas/productSchema";
+import { deleteItem } from "api/api";
+import { ProductFromDB } from "schemas/productSchema";
 
 interface Prop {
   item: ProductFromDB;
@@ -15,12 +13,12 @@ const ItemProduct = ({ item }: Prop) => {
   const queryClient = useQueryClient();
 
   const edit = (id: string) => {
-    router.push(`/products/${id}`);
+    router.push(`/products/${id}`).catch(console.error);
   };
   return (
     <Card
       onClick={() => edit(item._id)}
-      flexDirection={'row'}
+      flexDirection={"row"}
       className="cursor-pointer items-center gap-4 rounded bg-slate-300 p-2 hover:bg-slate-400"
     >
       <p className="capitalize">{item.title}</p>
@@ -29,8 +27,8 @@ const ItemProduct = ({ item }: Prop) => {
       <Button
         onClick={(event) => {
           event.stopPropagation();
-          deleteItem(item._id,'/products');
-          queryClient.invalidateQueries()
+          deleteItem(item._id, "/products").catch(console.error);
+          queryClient.invalidateQueries().catch(console.error);
         }}
       >
         Eliminar

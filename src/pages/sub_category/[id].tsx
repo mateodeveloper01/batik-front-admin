@@ -8,15 +8,15 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { editItem, getItem } from "~/api/api";
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
-import MySelectObject from "~/components/ui/selects/MySelectObject";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
+import { editItem, getItem } from "api/api";
+import MyForm from "components/ui/forms/MyForm";
+import MyInput from "components/ui/inputs/MyInput";
+import MySelectObject from "components/ui/selects/MySelectObject";
+import { CategoriesFromDB } from "schemas/categorySchema";
 import {
   SubCategoriesFromDB,
   SubCategorySchema,
-} from "~/schemas/subCategorySchema";
+} from "schemas/subCategorySchema";
 
 const ProductEdit = () => {
   const { query } = useRouter();

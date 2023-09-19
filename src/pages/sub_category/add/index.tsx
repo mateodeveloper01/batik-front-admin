@@ -8,12 +8,12 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
-import MySelectObject from "~/components/ui/selects/MySelectObject";
-import { SubCategorySchema } from "~/schemas/subCategorySchema";
-import { addItem, getItem } from "~/api/api";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
+import MyForm from "components/ui/forms/MyForm";
+import MyInput from "components/ui/inputs/MyInput";
+import MySelectObject from "components/ui/selects/MySelectObject";
+import { SubCategorySchema } from "schemas/subCategorySchema";
+import { addItem, getItem } from "api/api";
+import { CategoriesFromDB } from "schemas/categorySchema";
 
 const SubCategoryForm = () => {
   const { data: categories, isLoading: isLoadingCategory } = useQuery<

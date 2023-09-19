@@ -9,6 +9,7 @@ export interface orderProp {
     };
   };
   status: Status;
+ 
 }
 enum Status {
   Pending = "pending",

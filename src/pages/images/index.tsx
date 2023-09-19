@@ -1,9 +1,9 @@
 import { Button, CloseButton, Image } from "@chakra-ui/react";
-import { imagesFromDB } from "~/schemas/imgSchema";
+import { imagesFromDB } from "schemas/imgSchema";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import UploadImg from "~/components/img/UploadImg";
-import { deleteItem, getItem } from "~/api/api";
+import UploadImg from "components/img/UploadImg";
+import { deleteItem, getItem } from "api/api";
 
 const images: React.FC = () => {
   const queryClient = useQueryClient();

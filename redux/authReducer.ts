@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-interface Props {
+export interface PropsStateUser {
   user: {
     message: string;
     data: string;
@@ -9,7 +9,7 @@ interface Props {
     };
   } | null;
 }
-const initialState: Props = {
+const initialState: PropsStateUser = {
   user: null,
 };
 

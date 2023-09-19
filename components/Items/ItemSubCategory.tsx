@@ -1,8 +1,8 @@
 import { Button, Card } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { deleteItem } from "~/api/api";
-import { SubCategoriesFromDB } from "~/schemas/subCategorySchema";
+import { deleteItem } from "api/api";
+import { SubCategoriesFromDB } from "schemas/subCategorySchema";
 
 interface Prop {
   item: SubCategoriesFromDB;
@@ -13,7 +13,7 @@ const ItemSubCategory = ({ item }: Prop) => {
   const queryClient = useQueryClient();
 
   const edit = (id: string) => {
-    router.push(`/sub_category/${id}`);
+    router.push(`/sub_category/${id}`).catch(console.error);
   };
   return (
     <Card
@@ -25,8 +25,8 @@ const ItemSubCategory = ({ item }: Prop) => {
       <Button
         onClick={(event) => {
           event.stopPropagation();
-          deleteItem( item._id,"/sub-categories");
-          queryClient.invalidateQueries()
+          deleteItem(item._id, "/sub-categories").catch(console.error);
+          queryClient.invalidateQueries().catch(console.error);
         }}
       >
         Eliminar

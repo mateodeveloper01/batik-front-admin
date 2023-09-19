@@ -1,18 +1,22 @@
 import { Button, Card, Container, Heading } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { getLogin } from "~/api/loginApi";
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
-import { setUser } from "~/redux/authReducer";
-import { LoginSchema } from "~/schemas/authSchema";
+import { getLogin } from "api/loginApi";
 
+import { setUser } from "redux/authReducer";
+import { LoginSchema } from "schemas/authSchema";
+import MyInput from "components/ui/inputs/MyInput";
+import MyForm from "components/ui/forms/MyForm";
+interface Props {
+  email: string;
+  password: string;
+}
 const Login = () => {
   const dispatch = useDispatch();
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: Props) => {
     const res = await getLogin(data);
     dispatch(setUser(res));
   };
-  const onError = (error: any) => console.log({ error });
+  const onError = (error:any) => console.log({ error });
 
   return (
     <Container className="pt-2">

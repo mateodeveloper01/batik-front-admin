@@ -1,7 +1,4 @@
-import {
-  Checkbox,
-  FormControl,
-} from "@chakra-ui/react";
+import { Checkbox, FormControl } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 
 export interface MyCheckbox {
@@ -10,11 +7,7 @@ export interface MyCheckbox {
 }
 
 const MyCheckbox = ({ label, fieldName }: MyCheckbox) => {
-  const {
-    getValues,
-    formState: { errors },
-    register,
-  } = useFormContext();
+  const { register } = useFormContext();
 
   return (
     <FormControl padding={2}>

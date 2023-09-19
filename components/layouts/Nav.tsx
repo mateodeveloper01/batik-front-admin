@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Container, VStack, Box } from "@chakra-ui/react";
+import { Button, ButtonGroup, Box } from "@chakra-ui/react";
 import Link from "next/link";
 
 const Nav = () => {
