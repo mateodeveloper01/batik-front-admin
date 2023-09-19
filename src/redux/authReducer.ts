@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface Props {
-  user: {} |null
+  user: {
+    message: string;
+    data: string;
+    user: {
+      email: string;
+      password: string;
+    };
+  } | null;
 }
-const initialState:Props = {
+const initialState: Props = {
   user: null,
 };
 
