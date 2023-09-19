@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import Link from "next/link";
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import ItemCategory from "~/components/Items/ItemCategory";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
-import { getItem } from "~/api/api";
+import ItemCategory from "components/Items/ItemCategory";
+import { CategoriesFromDB } from "schemas/categorySchema";
+import { getItem } from "api/api";
 
 const Category = () => {
   const { data: category, isLoading } = useQuery<CategoriesFromDB[]>({

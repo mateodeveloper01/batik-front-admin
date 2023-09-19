@@ -8,15 +8,16 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { editItem, getItem } from "~/api/api";
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
-import MySelectImg from "~/components/ui/selects/MySelectImg";
+import { editItem, getItem } from "api/api";
+
 import {
   CategoriesFromDB,
   Category,
   categorySchema,
-} from "~/schemas/categorySchema";
+} from "schemas/categorySchema";
+import MyInput from "components/ui/inputs/MyInput";
+import MySelectImg from "components/ui/selects/MySelectImg";
+import MyForm from "components/ui/forms/MyForm";
 
 const CategoryEdit = () => {
   const { query } = useRouter();
@@ -29,8 +30,7 @@ const CategoryEdit = () => {
 
   const item = categories?.filter((i) => i._id === query.id)[0];
   const onSubmit = async (data: Category) => {
-    const res = await editItem({ ...data, _id: item?._id }, "/categories");
-    console.log(res.message);
+     await editItem({ ...data, _id: item?._id }, "/categories");
   };
   const onError = (error: any) => console.log({ error });
 

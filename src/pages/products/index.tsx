@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 import Link from "next/link";
-import ItemProduct from "~/components/Items/ItemProduct";
+import ItemProduct from "components/Items/ItemProduct";
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import { ProductFromDB } from "~/schemas/productSchema";
-import { getItem } from "~/api/api";
+import { ProductFromDB } from "schemas/productSchema";
+import { getItem } from "api/api";
 
 const subCategory = () => {
   const { data: products, isLoading } = useQuery<ProductFromDB[]>({

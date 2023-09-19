@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
     "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    // "strict": true,
+    // "noUnusedLocals": true,
+    // "noImplicitReturns": true,
+    // "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,8 +26,11 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "~/*": [
+        "./src/*"
+      ]
+    },
+    "strict": false
   },
   "include": [
     ".eslintrc.cjs",
@@ -27,7 +38,10 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    "**/*.mjs"
-, "../frontend-client/src/api/api.ts"  ],
-  "exclude": ["node_modules"]
+    "**/*.mjs",
+    "../frontend-client/src/api/api.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

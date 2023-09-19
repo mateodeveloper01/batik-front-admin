@@ -6,19 +6,19 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import MyForm from "~/components/ui/forms/MyForm";
-import MyInput from "~/components/ui/inputs/MyInput";
+import MyForm from "components/ui/forms/MyForm";
+import MyInput from "components/ui/inputs/MyInput";
 import {
   SubCategoriesFromDB,
   SubCategorySchema,
-} from "~/schemas/subCategorySchema";
-import { addItem, getItem } from "~/api/api";
-import MyCheckbox from "~/components/ui/checkbox/MyCheckbox";
-import MySelectImg from "~/components/ui/selects/MySelectImg";
-import MySelect from "~/components/ui/selects/MySelect";
-import MySelectObject from "~/components/ui/selects/MySelectObject";
-import { PROD_TYPES, productSchema } from "~/schemas/productSchema";
-import { CategoriesFromDB } from "~/schemas/categorySchema";
+} from "schemas/subCategorySchema";
+import { addItem, getItem } from "api/api";
+import MyCheckbox from "components/ui/checkbox/MyCheckbox";
+import MySelectImg from "components/ui/selects/MySelectImg";
+import MySelect from "components/ui/selects/MySelect";
+import MySelectObject from "components/ui/selects/MySelectObject";
+import { PROD_TYPES, productSchema } from "schemas/productSchema";
+import { CategoriesFromDB } from "schemas/categorySchema";
 import { useQuery } from "@tanstack/react-query";
 
 const CategoryForm = () => {
