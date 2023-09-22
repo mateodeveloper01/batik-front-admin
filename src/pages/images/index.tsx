@@ -1,11 +1,11 @@
-import { Button, CloseButton, Image } from "@chakra-ui/react";
+import { Button, CloseButton, Image ,Container} from "@chakra-ui/react";
 import { imagesFromDB } from "schemas/imgSchema";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import UploadImg from "components/img/UploadImg";
 import { deleteItem, getItem } from "api/api";
 
-const images: React.FC = () => {
+const Images: React.FC = () => {
   const queryClient = useQueryClient();
   const { data: imagenes, isLoading: imagenesCategory } = useQuery<
     imagesFromDB[]
@@ -18,7 +18,7 @@ const images: React.FC = () => {
     queryClient.invalidateQueries();
   };
   return (
-    <div>
+    <Container minW={'100vh'}>
       <UploadImg />
       <Link href={"/"}>
         <Button color={"gray"}>Volver</Button>
@@ -28,7 +28,7 @@ const images: React.FC = () => {
           ? "loading"
           : imagenes?.map((i) => (
               <div key={i._id} className="relative inline-block">
-                <Image src={i.url} alt={i.title} />
+                <Image src={i.url} alt={i.title}  />
                 <CloseButton
                   onClick={() => {
                     removeImg(i.cloudinaryId);
@@ -38,8 +38,8 @@ const images: React.FC = () => {
               </div>
             ))}
       </div>
-    </div>
+    </Container>
   );
 };
-
-export default images;
+ 
+export default Images;
