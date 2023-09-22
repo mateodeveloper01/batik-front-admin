@@ -1,11 +1,11 @@
 import Nav from "./Nav";
-
+import { Box } from "@chakra-ui/react";
 const Layout = ({ children }: any) => {
   return (
-    <div className="flex h-screen">
+    <Box css={"display:flex"}>
       <Nav />
       <main>{children}</main>
-    </div>
+    </Box>
   );
 };
 

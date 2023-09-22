@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const validateRoutes = (user: any) => {
-    if (!user && PROTECTED_ROUTES.includes(router.pathname)) {
+    if (!user && router.pathname !== "/acount/login") {
       router.push("/acount/login").catch(console.error);
     }
     if (!!user && router.pathname === "/acount/login") {

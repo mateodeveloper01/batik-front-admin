@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import Link from "next/link";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button, ButtonGroup,Flex } from "@chakra-ui/react";
 import { SubCategoriesFromDB } from "schemas/subCategorySchema";
 import { getItem } from "api/api";
 import ItemSubCategory from "components/Items/ItemSubCategory";
@@ -15,7 +15,7 @@ const Products = () => {
   });
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <Flex direction={'column'} align={'center'} gap={4} minH={'100vh'}>
       {subCategories ? (
         subCategories.map((i: SubCategoriesFromDB) => (
           <ItemSubCategory key={i._id} item={i} />
@@ -32,7 +32,7 @@ const Products = () => {
           <Button colorScheme={"gray"}>Volver </Button>
         </Link>
       </ButtonGroup>
-    </div>
+    </Flex>
   );
 };
 

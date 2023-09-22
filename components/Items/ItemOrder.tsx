@@ -1,45 +1,29 @@
 import { Box, Card, Heading, Text } from "@chakra-ui/react";
+import { PropOrder } from "schemas/orderSchema";
 interface Prop {
-  order: {
-    body: {
-      additional_info: {
-        shipments: {
-          receiver_address: {
-            city_name: string;
-            state_name: string;
-            street_name: string;
-            street_number: string;
-            zip_code: string;
-          };
-        };
-        payer: { first_name: string; last_name: string };
-      };
-    };
-  };
+  order: PropOrder;
 }
+
 const ItemOrder = ({ order }: Prop) => {
-  const { city_name, state_name, street_name, street_number, zip_code } =
-    order.body.additional_info.shipments.receiver_address;
-  const { first_name, last_name } = order.body.additional_info.payer;
-
-
+  const { payer, paymentStatus, products, shipments } = order;
   return (
     <Card p={4} mt={10}>
       <Heading size={"lg"}>info del pedido</Heading>
       <Box>
         <Heading size={"md"}> direccion de envio</Heading>
-        <Text>Provincia:{state_name}</Text>
-        <Text>Ciudad: {city_name}</Text>
-        <Text>Calle: {street_name}</Text>
-        <Text>Numero: {street_number}</Text>
-        <Text>codigo postal: {zip_code}</Text>
+        <Text>Provincia:{shipments.state_name}</Text>
+        <Text>Ciudad: {shipments.city_name}</Text>
+        <Text>Calle: {shipments.street_name}</Text>
+        <Text>Numero: {shipments.street_number}</Text>
+        <Text>codigo postal: {shipments.zip_code}</Text>
       </Box>
       <Box>
         <Heading size={"md"}> Datos de facturacion</Heading>
         <Text>
-          Nombre completo: {first_name} {last_name}
+          Nombre completo: {payer.first_name} {payer.last_name}
         </Text>
-        <Text>email</Text>
+        <Text>email: {payer.email}</Text>
+        <Text>Estado del pago : {paymentStatus}</Text>
       </Box>
     </Card>
   );

@@ -6,13 +6,13 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import { ProductFromDB } from "schemas/productSchema";
 import { getItem } from "api/api";
 
-const subCategory = () => {
+const SubCategory = () => {
   const { data: products, isLoading } = useQuery<ProductFromDB[]>({
     queryKey: ["products"],
     queryFn: ()=>getItem('/products'),
   });
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 min-h-screen">
       {products ? (
         products.map((i: ProductFromDB) => <ItemProduct key={i._id} item={i} />)
       ) : (
@@ -31,4 +31,4 @@ const subCategory = () => {
   );
 };
 
-export default subCategory;
+export default SubCategory;

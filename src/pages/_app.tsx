@@ -10,16 +10,23 @@ import "~/styles/globals.css";
 import Layout from "components/layouts/Layout";
 const queryClient = new QueryClient();
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const MyApp: AppType = ({ Component, pageProps }: any) => {
+  const isLayoutEnabled = Component.layout !== false;
+
   return (
     <Provider store={store}>
       <ChakraProvider>
         <AuthProvider>
           <PersistGate loading="loading" persistor={persistor}>
             <QueryClientProvider client={queryClient}>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <>
+                {isLayoutEnabled && (
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                )}
+                {!isLayoutEnabled && <Component {...pageProps} />}
+              </>
             </QueryClientProvider>
           </PersistGate>
         </AuthProvider>
