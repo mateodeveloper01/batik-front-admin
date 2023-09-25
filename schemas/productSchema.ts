@@ -1,18 +1,14 @@
 import { z } from "zod";
+import { imgSchema } from "./imgSchema";
 
 export interface ProductFromDB {
   title: string;
   description: string;
-  price: number;
+  price: string;
   new: boolean;
   img: any;
-  img2: any;
-  type: {
-    type: string;
-    enum: ["normal", "featured", "trending"];
-  };
+  type: "normal" | "featured" | "trending";
   categories: any;
-  sub_categories: any;
   _id: string;
 }
 
@@ -23,11 +19,10 @@ export const productSchema = z.object({
   description: z.string(),
   price: z.string(),
   new: z.boolean(),
-  img: z.string(),
-  img2: z.string(),
+  img: z.array(z.string()),
+  // img:z.string(),
   type: z.enum(PROD_TYPES) || null,
   categories: z.string(),
-  sub_categories: z.string(),
 });
 
 export type Products = z.infer<typeof productSchema>;

@@ -3,7 +3,7 @@ import { z } from "zod";
 export const categorySchema = z.object({
   title: z.string(),
   description: z.string(),
-  img: z.string(), // Puedes cambiarlo a z.string() si es opcional
+  img: z.array(z.string()),
 });
 
 export interface CategoriesFromDB {

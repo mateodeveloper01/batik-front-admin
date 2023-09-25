@@ -40,7 +40,7 @@ const Login = () => {
     console.log({ error });
     setAlert("error");
   };
-  console.log(alert);
+
 
   return (
     <Container pt={32}>
