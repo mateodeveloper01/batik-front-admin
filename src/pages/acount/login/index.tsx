@@ -27,11 +27,15 @@ const Login = () => {
   const onSubmit = async (data: Props) => {
     try {
       const res = await getLogin(data);
-      setAlert("success");
-      dispatch(setUser(res));
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      if (!res.admin) {
+        setAlert("error");
+      } else {
+        setAlert("success");
+        dispatch(setUser(res));
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
     } catch (error) {
       setAlert("error");
     }
@@ -40,7 +44,6 @@ const Login = () => {
     console.log({ error });
     setAlert("error");
   };
-
 
   return (
     <Container pt={32}>
@@ -55,8 +58,17 @@ const Login = () => {
           onSubmit={onSubmit}
           onError={onError}
         >
-          <MyInput fieldName="email" label="Email" placeholder="ejemplo@gmail.com"/>
-          <MyInput fieldName="password" label="Contraseña" type="password" placeholder="•••••••"/>
+          <MyInput
+            fieldName="email"
+            label="Email"
+            placeholder="ejemplo@gmail.com"
+          />
+          <MyInput
+            fieldName="password"
+            label="Contraseña"
+            type="password"
+            placeholder="•••••••"
+          />
           <Button type="submit" colorScheme="purple">
             Iniciar sesión
           </Button>

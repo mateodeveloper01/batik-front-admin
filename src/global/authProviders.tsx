@@ -9,12 +9,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const user = useSelector((state: PropsStateUser) =>
     state.user ? state.user.user : null
   );
-
   const validateRoutes = (user: any) => {
-    if (!user && router.pathname !== "/acount/login") {
+    if (!user || (!user.admin && router.pathname !== "/acount/login")) {
       router.push("/acount/login").catch(console.error);
     }
-    if (!!user && router.pathname === "/acount/login") {
+
+    if (!!user && user.admin && router.pathname === "/acount/login") {
       router.push("/").catch(console.error);
     }
   };
