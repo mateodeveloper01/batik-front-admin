@@ -1,47 +1,57 @@
-import { Button, Card } from "@chakra-ui/react";
+import {
+  Button,
+  Tr,
+  Td,
+  Modal,
+  ModalOverlay,
+  useDisclosure,
+  Image,
+} from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { env } from "~/env.mjs";
+
 import { CategoriesFromDB } from "schemas/categorySchema";
+import EditCategoryModal from "components/modal/category/EditCategoryModal";
+import { deleteItem } from "api/api";
 
 interface Prop {
   item: CategoriesFromDB;
 }
 
 const ItemCategory = ({ item }: Prop) => {
-  const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const queryClient = useQueryClient();
-  const remove = (id: string) => {
-    axios
-      .delete(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/categories/${id}`, {
-        withCredentials: true,
-      })
-      .then(() => queryClient.invalidateQueries())
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-  const edit = (id: string) => {
-    router.push(`/category/${id}`).catch(console.error);
-  };
+
   return (
-    <Card
-      onClick={() => edit(item._id)}
-      flexDirection={"row"}
-      className="cursor-pointer items-center gap-4 rounded bg-slate-300 p-2 hover:bg-slate-400"
-    >
-      <p className="capitalize">{item.title}</p>
-      <p>{item.description}</p>
-      <Button
-        onClick={(event) => {
-          event.stopPropagation();
-          remove(item._id);
-        }}
-      >
-        Eliminar
-      </Button>
-    </Card>
+    <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <EditCategoryModal id={item._id} />
+      </Modal>
+      <Tr>
+        <Td>{item.title}</Td>
+        <Td>{item.description}</Td>
+        <Td>
+          <Image src={item?.img[0] ? item?.img[0].url : ""} boxSize={"80px"} />
+        </Td>
+        <Td>
+          <Button onClick={onOpen} colorScheme="teal">
+            Editar
+          </Button>
+        </Td>
+        <Td>
+          <Button
+            onClick={(event) => {
+              event.stopPropagation();
+              deleteItem(item._id, "/categories").catch(console.error);
+              queryClient.invalidateQueries().catch(console.error);
+            }}
+            colorScheme="red"
+          >
+            Eliminar
+          </Button>
+        </Td>
+      </Tr>
+    </>
   );
 };
 

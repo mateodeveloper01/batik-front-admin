@@ -15,6 +15,8 @@ import {
   GridItem,
   useDisclosure,
   Box,
+  Flex,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
@@ -24,97 +26,86 @@ import UploadImg from "components/img/UploadImg";
 
 interface Props<T> {
   fieldName: keyof T;
-  flex?: number;
-  defaultImageId?: string;
+  defaultImageId?: imagesFromDB[];
+  isProduct?: boolean;
 }
 
-function MySelectImg<T>({ fieldName, flex = 3, defaultImageId }: Props<T>) {
+function MySelectImg<T>({
+  fieldName,
+  defaultImageId,
+  isProduct = true,
+}: Props<T>) {
+  const [selectImgs, setSelectImgs] = useState<imagesFromDB[]>([]);
   const { register, setValue } = useFormContext();
-
-  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
-
-  const handleImageSelect = (id: string, url: string) => {
-    setSelectedImageId(id);
-    setSelectedImageUrl(url);
-    setValue(fieldName as string, id);
-    onClose();
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading: isLoadingImages } = useQuery<imagesFromDB[]>({
     queryKey: ["img"],
     queryFn: () => getItem("/img"),
   });
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const addImg = (item: imagesFromDB) => {
+    if (!selectImgs.some((i) => i._id === item._id)) {
+      isProduct ? setSelectImgs([...selectImgs, item]) : setSelectImgs([item]);
+    } else {
+      setSelectImgs(selectImgs.filter((i) => i._id !== item._id));
+    }
+  };
   useEffect(() => {
-    // Establecer el valor predeterminado cuando cambia defaultImageId
+    console.log("hola");
     if (defaultImageId) {
-      const defaultImage = data?.find((o) => o._id === defaultImageId);
-      if (defaultImage) {
-        setSelectedImageId(defaultImage._id);
-        setSelectedImageUrl(defaultImage.url);
-        setValue(fieldName as string, defaultImage._id);
-      }
+      setSelectImgs(defaultImageId);
     }
   }, [defaultImageId, data, fieldName, setValue]);
-
-  if (isLoadingImages) {
-    return <>loading</>;
-  }
+  useEffect(() => {
+    setValue(
+      fieldName as string,
+      selectImgs.map((i) => i._id)
+    );
+  }, [selectImgs]);
 
   return (
-    <FormControl flex={flex} paddingBottom={2}>
-      <Menu>
-        <MenuButton
-          as={Button}
-          rightIcon={<span>&#x25BE;</span>}
-          borderWidth="1px"
-          onClick={onOpen}
-        >
+    <FormControl pt={2}>
+      <>
+        <FormLabel>Selecciona una o más imágenes</FormLabel>
+        <Button borderWidth="1px" onClick={onOpen}>
           Seleccionar
-        </MenuButton>
+        </Button>
         <Box display="flex" alignItems="center" mt={2}>
-          {selectedImageId && selectedImageUrl && (
-            <>
-              <Image
-                src={selectedImageUrl}
-                alt="Selected"
-                boxSize="30px"
-                mr={2}
-              />
-              <Button onClick={() => setSelectedImageId(null)}>
-                Cancelar selección
-              </Button>
-            </>
-          )}
+          {selectImgs.map((i) => (
+            <div key={Math.random()}>
+              <Image src={i.url} boxSize="100px" mr={2} />
+            </div>
+          ))}
         </Box>
-        <Modal isOpen={isOpen} onClose={onClose} size="xl">
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Selecciona una imagen</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody className="flex flex-col gap-4">
-              <Grid templateColumns="repeat(4, 1fr)" gap={4}>
-                {data?.map((o) => (
-                  <GridItem key={o._id}>
-                    <Image
-                      src={o.url}
-                      alt={o.title}
-                      boxSize="150px"
-                      cursor="pointer"
-                      borderRadius="md"
-                      boxShadow={
-                        selectedImageId === o._id ? "0 0 0 2px #3182CE" : "none"
-                      }
-                      onClick={() => handleImageSelect(o._id, o.url)}
-                    />
-                  </GridItem>
-                ))}
-              </Grid>
-              <UploadImg />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Menu>
+      </>
+
+      <Modal size={"4xl"} isOpen={isOpen} onClose={onClose}>
+        <ModalCloseButton />
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Selecciona una o más imágenes</ModalHeader>
+
+          <ModalBody>
+            <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+              {data?.map((o) => (
+                <GridItem key={o._id}>
+                  <Image
+                    src={o.url}
+                    alt={o.title}
+                    boxSize="150px"
+                    cursor="pointer"
+                    borderRadius="md"
+                    boxShadow={
+                      // console.log('object');
+                      selectImgs.includes(o) ? "0 0 0 2px #3182CE" : "none"
+                    }
+                    onClick={() => addImg(o)}
+                  />
+                </GridItem>
+              ))}
+            </Grid>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       <input type="hidden" {...register(fieldName as string)} />
     </FormControl>
   );
