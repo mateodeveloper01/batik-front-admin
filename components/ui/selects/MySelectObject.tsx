@@ -2,13 +2,12 @@ import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { CategoriesFromDB } from "schemas/categorySchema";
-import { SubCategoriesFromDB } from "schemas/subCategorySchema";
 
 interface Props<T> {
   fieldName: keyof T;
   label: string;
   flex?: number;
-  options: SubCategoriesFromDB[] | CategoriesFromDB[];
+  options: CategoriesFromDB[];
   defaultValue?: string;
 }
 
@@ -19,10 +18,7 @@ function MySelectObject<T>({
   options,
   defaultValue,
 }: Props<T>) {
-  const {
-    register,
-    setValue,
-  } = useFormContext();
+  const { register, setValue } = useFormContext();
   useEffect(() => {
     // Establecer el valor predeterminado cuando cambia defaultValue
     if (defaultValue) {
