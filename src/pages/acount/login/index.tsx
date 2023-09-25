@@ -45,18 +45,18 @@ const Login = () => {
   return (
     <Container pt={32}>
       <Card padding={4}>
-        <Heading className="text-center text-2xl">Iniciar session</Heading>
+        <Heading className="text-center text-2xl">Iniciar sesión</Heading>
         <MyForm
-          defaultValues={{
-            email: "mateopedehonta@gmail.com",
-            password: "mateo123",
-          }}
+          // defaultValues={{
+          //   email: "mateopedehonta@gmail.com",
+          //   password: "mateo123",
+          // }}
           zodSchema={LoginSchema}
           onSubmit={onSubmit}
           onError={onError}
         >
-          <MyInput fieldName="email" label="Email" />
-          <MyInput fieldName="password" label="Password" />
+          <MyInput fieldName="email" label="Email" placeholder="ejemplo@gmail.com"/>
+          <MyInput fieldName="password" label="Contraseña" type="password" placeholder="•••••••"/>
           <Button type="submit" colorScheme="purple">
             Iniciar sesión
           </Button>
