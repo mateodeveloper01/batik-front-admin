@@ -83,7 +83,6 @@ function MySelectImg<T>({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Selecciona una o más imágenes</ModalHeader>
-
           <ModalBody>
             <Grid templateColumns="repeat(4, 1fr)" gap={4}>
               {data?.map((o) => (
@@ -103,6 +102,9 @@ function MySelectImg<T>({
                 </GridItem>
               ))}
             </Grid>
+            <Box py={10}>
+              <UploadImg />
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
