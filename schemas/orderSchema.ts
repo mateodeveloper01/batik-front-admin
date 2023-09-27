@@ -14,6 +14,8 @@ interface Shipment {
   street_name: string;
   street_number: string;
   zip_code: string;
+  shippingMethod: String;
+  status:string
 }
 
 interface Address {
@@ -25,17 +27,20 @@ interface Payer {
   address: Address;
   first_name: string;
   last_name: string;
-  email:string
+  email: string;
 }
 
 export interface PropOrder {
   products: Product[];
   shipments: Shipment;
   payer: Payer;
-  paymentStatus: string;
-  _id:string
+  payment: {
+    paymentStatus: string;
+    paymentMethod: string;
+  };
+  date: Date;
+  _id: string;
 }
-
 
 // export interface orderProp {
 //   shipping: shippingProp;
@@ -48,7 +53,7 @@ export interface PropOrder {
 //     };
 //   };
 //   status: Status;
- 
+
 // }
 // enum Status {
 //   Pending = "pending",
