@@ -1,10 +1,17 @@
 import Nav from "./Nav";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 const Layout = ({ children }: any) => {
   return (
-    <Box css={"display:flex"} w={"100vw"}>
-      <Nav />
-      <Box w={'80%'}>{children}</Box>
+    <Box
+      w={"100vw"}
+      display={"flex"}
+      flexDirection={{ md: "row", base: "column" }}
+      p={2}
+    >
+      <Flex justify={"end"}>
+        <Nav />
+      </Flex>
+      <Box w={{ md: "80%", base: "100%" }}>{children}F</Box>
     </Box>
   );
 };

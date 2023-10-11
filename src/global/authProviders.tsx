@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (!!user && user.admin && router.pathname === "/acount/login") {
-      router.push("/").catch(console.error);
+      router.push("/products").catch(console.error);
     }
   };
 

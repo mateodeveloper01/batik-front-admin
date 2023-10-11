@@ -54,7 +54,7 @@ const AddProductModal = () => {
           >
             <MyInput fieldName="title" label="Titulo" />
             <MyInput fieldName="description" label="Descripcion" />
-            <MyInput fieldName="price" label="Precio" type="number" />
+            <MyInput fieldName="price" label="Precio" />
             <MyCheckbox fieldName="new" label={"Es nuevo?"} />
             <MySelect fieldName="type" label="Tipo" options={PROD_TYPES} />
             <MySelectObject
@@ -64,18 +64,18 @@ const AddProductModal = () => {
             />
             <MySelectImg fieldName={"img"} />
             {alert ? (
-                <Alert status={alert} mt={4}>
-                  <AlertIcon />
-                  {alert === "error" && (
-                    <AlertTitle>Datos ingresados incorrecto</AlertTitle>
-                  )}
-                  {alert === "success" && (
-                    <AlertTitle>Producto agregado</AlertTitle>
-                  )}
-                </Alert>
-              ) : (
-                <></>
-              )}
+              <Alert status={alert} mt={4}>
+                <AlertIcon />
+                {alert === "error" && (
+                  <AlertTitle>Datos ingresados incorrecto</AlertTitle>
+                )}
+                {alert === "success" && (
+                  <AlertTitle>Producto agregado</AlertTitle>
+                )}
+              </Alert>
+            ) : (
+              <></>
+            )}
             <ModalFooter>
               <Button
                 onClick={() =>

@@ -10,18 +10,22 @@ const UploadImg = () => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const formData = new FormData();
-    if (acceptedFiles[0]) {
-      formData.append("img", acceptedFiles[0]);
-      axios
-        .post(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/img`, formData, {
-          withCredentials: true,
-        })
-        .then(() => queryClient.invalidateQueries())
-        .catch(console.error);
-    }
+    acceptedFiles.map((file, index) => {
+      formData.append(`img`, file);
+    });
+
+    axios
+      .post(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/img`, formData, {
+        withCredentials: true,
+      })
+      .then(() => queryClient.invalidateQueries())
+      .catch(console.error);
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: true,
+  });
 
   return (
     <div {...getRootProps()}>
