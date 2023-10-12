@@ -18,17 +18,14 @@ const Images: React.FC = () => {
     queryClient.invalidateQueries();
   };
   return (
-    <Container minW={'100vh'}>
+    <Container display={'flex'} flexDirection={'column'} gap={4}>
       <UploadImg />
-      <Link href={"/"}>
-        <Button color={"gray"}>Volver</Button>
-      </Link>
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 max-md:grid-cols-2 gap-3">
         {imagenesCategory
           ? "loading"
           : imagenes?.map((i) => (
               <div key={i._id} className="relative inline-block">
-                <Image src={i.url} alt={i.title}  />
+                <Image src={i.url} alt={i.title} w={'full'} />
                 <CloseButton
                   onClick={() => {
                     removeImg(i.cloudinaryId);
