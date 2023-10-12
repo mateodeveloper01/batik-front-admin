@@ -19,7 +19,7 @@ export const productSchema = z.object({
   description: z.string().min(3,'Debe tener al menos 3 caracteres'),
   price: z.string().min(3,'Debe tener al menos 3 caracteres'),
   new: z.boolean(),
-  img: z.array(z.string()).length(1,'Debe tener al menos una imagen'),
+  img: z.array(z.string()).min(1,'Debe tener al menos una imagen'),
   // img:z.string(),
   type: z.enum(PROD_TYPES) || null,
   categories: z.string().min(1,'Debe tener al menos 3 caracteres'),
