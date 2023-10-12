@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   FormControl,
   Image,
@@ -17,6 +17,7 @@ import {
   Box,
   Flex,
   FormLabel,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
@@ -36,7 +37,11 @@ function MySelectImg<T>({
   isProduct = true,
 }: Props<T>) {
   const [selectImgs, setSelectImgs] = useState<imagesFromDB[]>([]);
-  const { register, setValue } = useFormContext();
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading: isLoadingImages } = useQuery<imagesFromDB[]>({
     queryKey: ["img"],
@@ -62,7 +67,7 @@ function MySelectImg<T>({
   }, [selectImgs]);
 
   return (
-    <FormControl pt={2}>
+    <FormControl pt={2} isInvalid={!!errors[fieldName as string]}>
       <>
         <FormLabel>Selecciona una o más imágenes</FormLabel>
         <Button borderWidth="1px" onClick={onOpen}>
@@ -108,6 +113,9 @@ function MySelectImg<T>({
         </ModalContent>
       </Modal>
       <input type="hidden" {...register(fieldName as string)} />
+      <FormErrorMessage>
+        {errors[fieldName]?.message as ReactNode}
+      </FormErrorMessage>
     </FormControl>
   );
 }

@@ -1,5 +1,10 @@
-import { FormControl, FormLabel, Select } from "@chakra-ui/react";
-import { useEffect } from "react";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Select,
+} from "@chakra-ui/react";
+import { ReactNode, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { CategoriesFromDB } from "schemas/categorySchema";
 
@@ -18,7 +23,11 @@ function MySelectObject<T>({
   options,
   defaultValue,
 }: Props<T>) {
-  const { register, setValue } = useFormContext();
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
   useEffect(() => {
     // Establecer el valor predeterminado cuando cambia defaultValue
     if (defaultValue) {
@@ -26,7 +35,7 @@ function MySelectObject<T>({
     }
   }, [defaultValue, fieldName, setValue]);
   return (
-    <FormControl flex={flex} paddingBottom={2}>
+    <FormControl flex={flex} paddingBottom={2} isInvalid={!!errors[fieldName as string]}>
       <FormLabel>{label}</FormLabel>
       <Select placeholder="Seleccionar" {...register(fieldName as string)}>
         {options.map((o) => (
@@ -35,6 +44,9 @@ function MySelectObject<T>({
           </option>
         ))}
       </Select>
+      <FormErrorMessage>
+        {errors[fieldName]?.message as ReactNode}
+      </FormErrorMessage>
     </FormControl>
   );
 }
