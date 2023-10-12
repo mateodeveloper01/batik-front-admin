@@ -33,7 +33,7 @@ const Login = () => {
         setAlert("success");
         dispatch(setUser(res));
         setTimeout(() => {
-          router.push("/");
+          router.push("/products");
         }, 1000);
       }
     } catch (error) {

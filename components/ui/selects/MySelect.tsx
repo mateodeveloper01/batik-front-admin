@@ -1,4 +1,10 @@
-import { FormControl, FormLabel, Select } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Select,
+} from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface Props<T> {
@@ -7,11 +13,14 @@ interface Props<T> {
   flex?: number;
   options: readonly string[];
 }
-
 function MySelect<T>({ label, fieldName, flex = 3, options }: Props<T>) {
-  const { register } = useFormContext();
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext();
+
   return (
-    <FormControl flex={flex} paddingBottom={2}>
+    <FormControl flex={flex} paddingBottom={2} isInvalid={!!errors[fieldName as string]}>
       <FormLabel>{label}</FormLabel>
       <Select placeholder="Seleccionar" {...register(fieldName as string)}>
         {options.map((o) => (
@@ -20,6 +29,9 @@ function MySelect<T>({ label, fieldName, flex = 3, options }: Props<T>) {
           </option>
         ))}
       </Select>
+      <FormErrorMessage>
+        {errors[fieldName]?.message as ReactNode}
+      </FormErrorMessage>
     </FormControl>
   );
 }

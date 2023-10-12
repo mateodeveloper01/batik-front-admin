@@ -27,12 +27,12 @@ const ItemProduct = ({ item }: Prop) => {
         <EditProductModal id={item._id} />
       </Modal>
       <Tr>
-        <Td>{item.title}</Td>
-        <Td>{item.description}</Td>
-        <Td>{item.categories[0].title}</Td>
-        <Td>${item.price}</Td>
-        <Td>{item.type}</Td>
-        <Td>
+        <Td maxW={'100px'}>{item.title}</Td>
+        <Td maxW={'100px'}>{item.description}</Td>
+        <Td maxW={'100px'}>{item.categories[0].title}</Td>
+        <Td maxW={'100px'}>${item.price}</Td>
+        <Td maxW={'100px'}>{item.type}</Td>
+        <Td maxW={'100px'}>
           <Image src={item.img[0].url} boxSize={"80px"} />
         </Td>
         <Td>
@@ -45,7 +45,7 @@ const ItemProduct = ({ item }: Prop) => {
             onClick={(event) => {
               event.stopPropagation();
               deleteItem(item._id, "/products").catch(console.error);
-              queryClient.invalidateQueries().catch(console.error);
+              queryClient.invalidateQueries()
             }}
             colorScheme="red"
           >

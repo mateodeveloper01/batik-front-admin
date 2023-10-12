@@ -79,7 +79,7 @@ const AddProductModal = () => {
             <ModalFooter>
               <Button
                 onClick={() =>
-                  queryClient.invalidateQueries().catch(console.error)
+                  queryClient.invalidateQueries()
                 }
                 type="submit"
                 colorScheme="purple"

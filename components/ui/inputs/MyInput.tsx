@@ -27,7 +27,6 @@ function MyInput<T>({
   } = useFormContext();
 
   const registerOptions = valueAsNumber ? { valueAsNumber } : { valueAsDate };
-
   return (
     <FormControl mb={mb} isInvalid={!!errors[fieldName as string]} flex={flex}>
       {!!showLabel && <FormLabel>{label}</FormLabel>}

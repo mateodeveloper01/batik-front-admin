@@ -15,14 +15,14 @@ export interface ProductFromDB {
 export const PROD_TYPES = ["normal", "featured", "trending"] as const;
 
 export const productSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  price: z.string(),
+  title: z.string().min(3,'Debe tener al menos 3 caracteres'),
+  description: z.string().min(3,'Debe tener al menos 3 caracteres'),
+  price: z.string().min(3,'Debe tener al menos 3 caracteres'),
   new: z.boolean(),
-  img: z.array(z.string()),
+  img: z.array(z.string()).length(1,'Debe tener al menos una imagen'),
   // img:z.string(),
   type: z.enum(PROD_TYPES) || null,
-  categories: z.string(),
+  categories: z.string().min(1,'Debe tener al menos 3 caracteres'),
 });
 
 export type Products = z.infer<typeof productSchema>;

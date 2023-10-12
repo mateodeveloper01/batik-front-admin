@@ -1,4 +1,5 @@
-import { Checkbox, FormControl } from "@chakra-ui/react";
+import { Checkbox, FormControl, FormErrorMessage } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 
 export interface MyCheckbox {
@@ -7,11 +8,17 @@ export interface MyCheckbox {
 }
 
 const MyCheckbox = ({ label, fieldName }: MyCheckbox) => {
-  const { register } = useFormContext();
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext();
 
   return (
     <FormControl padding={2}>
       <Checkbox {...register(fieldName)}>{label}</Checkbox>
+      <FormErrorMessage>
+        {errors[fieldName]?.message as ReactNode}
+      </FormErrorMessage>
     </FormControl>
   );
 };
