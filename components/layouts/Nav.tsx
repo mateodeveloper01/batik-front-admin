@@ -6,7 +6,7 @@ import NavDrawner from "./NavDrawner";
 const Nav = () => {
   return (
     <>
-      <Box display={{ md: "flex", base: "none" }} w="20%" h={"100vh"}></Box>
+      {/* <Box display={{ md: "flex", base: "none" }} w="20%" ></Box> */}
       <Flex
         display={{ md: "flex", base: "none" }}
         w="20%"
@@ -20,9 +20,7 @@ const Nav = () => {
         textColor={"gray.500"}
         pt={40}
         position={"fixed"}
-        h={"100vh"}
-        className="aca"
-        // display={{ md: "" }}
+        h={"full"}
       >
         <LinkStyle dir="/products">productos</LinkStyle>
         <LinkStyle dir="/category">categoria</LinkStyle>

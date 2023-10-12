@@ -50,7 +50,6 @@ function MySelectImg<T>({
     }
   };
   useEffect(() => {
-    console.log("hola");
     if (defaultImageId) {
       setSelectImgs(defaultImageId);
     }
@@ -90,7 +89,7 @@ function MySelectImg<T>({
                   <Image
                     src={o.url}
                     alt={o.title}
-                    boxSize="150px"
+                    // boxSize="150px"
                     cursor="pointer"
                     borderRadius="md"
                     boxShadow={

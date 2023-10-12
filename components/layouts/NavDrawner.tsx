@@ -28,10 +28,12 @@ const NavBarButton = () => {
         icon={<RxHamburgerMenu />}
         variant="outline"
         onClick={onOpen}
+        display={{ md: "none", base: "flex" }}
+        m={2}
       />
       <Drawer
         isOpen={isOpen}
-        placement="left"
+        placement="right"
         size={"xs"}
         onClose={onClose}
         finalFocusRef={btnRef}
