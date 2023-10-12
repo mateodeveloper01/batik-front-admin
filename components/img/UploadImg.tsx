@@ -10,7 +10,7 @@ const UploadImg = () => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const formData = new FormData();
-    acceptedFiles.map((file, index) => {
+    acceptedFiles.map((file) => {
       formData.append(`img`, file);
     });
 

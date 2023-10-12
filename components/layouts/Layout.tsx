@@ -6,12 +6,12 @@ const Layout = ({ children }: any) => {
       w={"100vw"}
       display={"flex"}
       flexDirection={{ md: "row", base: "column" }}
-      p={2}
+      minH={"100vh"}
     >
-      <Flex justify={"end"}>
+      <Flex justify={"end"} w={{ md: "20%", base: "100%" }}>
         <Nav />
       </Flex>
-      <Box w={{ md: "80%", base: "100%" }}>{children}F</Box>
+      <Box w={{ md: "80%", base: "100%" }}>{children}</Box>
     </Box>
   );
 };

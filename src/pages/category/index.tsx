@@ -33,7 +33,7 @@ const Category = () => {
         <ModalOverlay />
         <AddCategoryModal />
       </Modal>
-      <Box h={"100vh"}>
+      <Box h={"100%"}>
         <Flex pl={10} align={"center"} h={"20%"}>
           <Button onClick={onOpen} colorScheme={"teal"}>
             Agregar categoria
