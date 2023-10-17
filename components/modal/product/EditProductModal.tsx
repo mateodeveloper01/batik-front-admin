@@ -78,7 +78,7 @@ const EditProductModal = ({ id }: { id: string }) => {
           >
             <MyInput fieldName="title" label="Titulo" />
             <MyInput fieldName="description" label="Descripcion" />
-            <MyInput fieldName="price" label="Precio" />
+            <MyInput fieldName="price" label="Precio" valueAsNumber />
             <MyCheckbox fieldName="new" label={"Es nuevo?"} />
             <MySelect fieldName="type" label="Tipo" options={PROD_TYPES} />
             <MySelectObject

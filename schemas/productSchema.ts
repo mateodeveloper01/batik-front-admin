@@ -17,7 +17,7 @@ export const PROD_TYPES = ["normal", "featured", "trending"] as const;
 export const productSchema = z.object({
   title: z.string().min(3,'Debe tener al menos 3 caracteres'),
   description: z.string().min(3,'Debe tener al menos 3 caracteres'),
-  price: z.number().min(1,'Debe tener al menos 3 caracteres'),
+  price: z.number().min(1,'Debe tener al menos 1 numero'),
   new: z.boolean(),
   img: z.array(z.string()).min(1,'Debe tener al menos una imagen'),
   // img:z.string(),
