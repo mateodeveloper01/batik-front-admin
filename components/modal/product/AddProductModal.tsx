@@ -54,7 +54,7 @@ const AddProductModal = () => {
           >
             <MyInput fieldName="title" label="Titulo" />
             <MyInput fieldName="description" label="Descripcion" />
-            <MyInput fieldName="price" label="Precio" />
+            <MyInput fieldName="price" label="Precio" valueAsNumber />
             <MyCheckbox fieldName="new" label={"Es nuevo?"} />
             <MySelect fieldName="type" label="Tipo" options={PROD_TYPES} />
             <MySelectObject
@@ -78,9 +78,7 @@ const AddProductModal = () => {
             )}
             <ModalFooter>
               <Button
-                onClick={() =>
-                  queryClient.invalidateQueries()
-                }
+                onClick={() => queryClient.invalidateQueries()}
                 type="submit"
                 colorScheme="purple"
               >
