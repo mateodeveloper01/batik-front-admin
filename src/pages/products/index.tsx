@@ -30,23 +30,49 @@ const SubCategory = () => {
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <AddProductModal/>
+        <AddProductModal />
       </Modal>
       <Box h={"100vh"}>
-        <Flex pl={10} align={"center"} h={"20%"}>
+        <Flex
+          pl={10}
+          align={"center"}
+          h={"20%"}
+          display={{ base: "none", md: "flex" }}
+        >
           <Button onClick={onOpen} colorScheme={"teal"}>
             Agregar productos
           </Button>
         </Flex>
+        <Box
+          position="fixed"
+          bottom="20px"
+          right="20px"
+          zIndex="1000"
+          display={{ md: "none" }}
+        >
+          <Button
+            onClick={onOpen}
+            rounded={"40%"}
+            colorScheme="teal"
+            size="md"
+            fontSize={"3xl"}
+          >
+            +
+          </Button>
+        </Box>
         <TableContainer>
           <Table variant="simple">
             <Thead>
               <Tr>
                 <Th>Titulo</Th>
-                <Th>Descripcion</Th>
-                <Th>Categoria</Th>
-                <Th>Price</Th>
-                <Th>Tipo</Th>
+                <Th display={{ md: "table-cell", base: "none" }}>
+                  Descripcion
+                </Th>
+                <Th display={{ md: "table-cell", base: "none" }}>Categoria</Th>
+                <Th display={{ md: "table-cell", base: "none" }} isNumeric>
+                  Price
+                </Th>
+                <Th display={{ md: "table-cell", base: "none" }}>Tipo</Th>
                 <Th>Imagenes</Th>
                 <Th>Editar</Th>
                 <Th>Eliminar</Th>

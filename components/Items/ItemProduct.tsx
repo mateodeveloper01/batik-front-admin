@@ -19,7 +19,12 @@ interface Prop {
 const ItemProduct = ({ item }: Prop) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const queryClient = useQueryClient();
-
+  const deleteButton = (e: any) => {
+    e.stopPropagation();
+    deleteItem(item._id, "/products").then(() =>
+      queryClient.invalidateQueries().catch(console.error)
+    );
+  };
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -27,12 +32,18 @@ const ItemProduct = ({ item }: Prop) => {
         <EditProductModal id={item._id} />
       </Modal>
       <Tr>
-        <Td maxW={'100px'}>{item.title}</Td>
-        <Td maxW={'100px'}>{item.description}</Td>
-        <Td maxW={'100px'}>{item.categories[0].title}</Td>
-        <Td maxW={'100px'}>${item.price}</Td>
-        <Td maxW={'100px'}>{item.type}</Td>
-        <Td maxW={'100px'}>
+        <Td maxW={{ md: "200px", base: "100px" }} whiteSpace="normal">
+          {item.title}
+        </Td>
+        <Td display={{ md: "table-cell", base: "none" }} whiteSpace="normal">
+          {item.description}
+        </Td>
+        <Td display={{ md: "table-cell", base: "none" }} whiteSpace="normal">
+          {item.categories[0].title}
+        </Td>
+        <Td display={{ md: "table-cell", base: "none" }}>${item.price}</Td>
+        <Td display={{ md: "table-cell", base: "none" }}>{item.type}</Td>
+        <Td minW={{ md: "100px" }}>
           <Image src={item.img[0].url} boxSize={"80px"} />
         </Td>
         <Td>
@@ -41,14 +52,7 @@ const ItemProduct = ({ item }: Prop) => {
           </Button>
         </Td>
         <Td>
-          <Button
-            onClick={(event) => {
-              event.stopPropagation();
-              deleteItem(item._id, "/products").catch(console.error);
-              queryClient.invalidateQueries()
-            }}
-            colorScheme="red"
-          >
+          <Button onClick={deleteButton} colorScheme="red">
             Eliminar
           </Button>
         </Td>

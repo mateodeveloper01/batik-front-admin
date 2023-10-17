@@ -30,6 +30,7 @@ const AddProductModal = () => {
     try {
       await addItem(data, "/products");
       setAlert("success");
+      queryClient.invalidateQueries()
     } catch (error) {
       setAlert("error");
     }
@@ -45,7 +46,7 @@ const AddProductModal = () => {
     return (
       <ModalContent className="pt-2">
         <ModalCloseButton />
-        <ModalHeader> Agregar productos</ModalHeader>
+        <ModalHeader > Agregar productos</ModalHeader>
         <ModalBody>
           <MyForm
             zodSchema={productSchema}
@@ -78,7 +79,7 @@ const AddProductModal = () => {
             )}
             <ModalFooter>
               <Button
-                onClick={() => queryClient.invalidateQueries()}
+                // onClick={() =>}
                 type="submit"
                 colorScheme="purple"
               >

@@ -49,6 +49,7 @@ const EditProductModal = ({ id }: { id: string }) => {
     try {
       await editItem({ ...data, _id: item?._id }, "/products");
       setAlert("success");
+      queryClient.invalidateQueries().catch(console.error);
     } catch (error) {
       setAlert("error");
     }
@@ -103,13 +104,7 @@ const EditProductModal = ({ id }: { id: string }) => {
             )}
             <ModalFooter>
               <ButtonGroup>
-                <Button
-                  onClick={() =>
-                    queryClient.invalidateQueries().catch(console.error)
-                  }
-                  type="submit"
-                  colorScheme="purple"
-                >
+                <Button type="submit" colorScheme="purple">
                   Guardar
                 </Button>
               </ButtonGroup>
