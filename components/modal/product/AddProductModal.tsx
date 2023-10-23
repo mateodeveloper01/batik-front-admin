@@ -57,6 +57,7 @@ const AddProductModal = () => {
             <MyInput fieldName="description" label="Descripcion" />
             <MyInput fieldName="price" label="Precio" valueAsNumber />
             <MyCheckbox fieldName="new" label={"Es nuevo?"} />
+            <MyCheckbox fieldName="isStock" label={"Hay stock?"} />
             <MySelect fieldName="type" label="Tipo" options={PROD_TYPES} />
             <MySelectObject
               fieldName="categories"
