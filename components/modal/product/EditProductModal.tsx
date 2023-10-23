@@ -20,7 +20,6 @@ import MySelect from "components/ui/selects/MySelect";
 import MySelectImg from "components/ui/selects/MySelectImg";
 import MySelectObject from "components/ui/selects/MySelectObject";
 import { CategoriesFromDB } from "schemas/categorySchema";
-import { imagesFromDB } from "schemas/imgSchema";
 import {
   PROD_TYPES,
   ProductFromDB,
@@ -80,7 +79,6 @@ const EditProductModal = ({ id }: { id: string }) => {
             <MyInput fieldName="title" label="Titulo" />
             <MyInput fieldName="description" label="Descripcion" />
             <MyInput fieldName="price" label="Precio" valueAsNumber />
-            <MyCheckbox fieldName="new" label={"Es nuevo?"} />
             <MySelect fieldName="type" label="Tipo" options={PROD_TYPES} />
             <MySelectObject
               fieldName="categories"
@@ -88,6 +86,8 @@ const EditProductModal = ({ id }: { id: string }) => {
               options={categories}
               defaultValue={item?.categories[0]?._id}
             />
+            <MyCheckbox fieldName="isStock" label={"Hay stock?"} />
+            <MyCheckbox fieldName="new" label={"Es nuevo?"} />
             <MySelectImg fieldName={"img"} defaultImageId={item?.img} />
             {alert ? (
               <Alert status={alert} mt={4}>
